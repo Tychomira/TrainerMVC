@@ -33,11 +33,11 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
     }
 
     public boolean save(Trainer trainer) {
-        boolean saving = persist(trainer);
-        if (saving) {
-            return true;
+        boolean notSaved = persist(trainer);
+        if (notSaved) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean delete(int id) {
@@ -53,7 +53,15 @@ public class TrainerDaoImpl extends AbstractDao<Integer, Trainer> implements ITr
     }
 
     public boolean update(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        Trainer db_trainer = findById(trainer.getId());
+        if (db_trainer != null) {
+            db_trainer.setFirstName(trainer.getFirstName());
+            db_trainer.setLastName(trainer.getLastName());
+            db_trainer.setSubject(trainer.getSubject());
 
+            return save(db_trainer);
+        } else {
+            return false;
+        }
+    }
 }

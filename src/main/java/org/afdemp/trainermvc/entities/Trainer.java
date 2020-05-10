@@ -16,7 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+    import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,13 +25,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Trainers", catalog = "trainer_mvc_assignment", schema = "")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Trainers.findAll", query = "SELECT t FROM Trainers t")
-    , @NamedQuery(name = "Trainers.findById", query = "SELECT t FROM Trainers t WHERE t.id = :id")
-    , @NamedQuery(name = "Trainers.findByFirstName", query = "SELECT t FROM Trainers t WHERE t.firstName = :firstName")
-    , @NamedQuery(name = "Trainers.findByLastName", query = "SELECT t FROM Trainers t WHERE t.lastName = :lastName")
-    , @NamedQuery(name = "Trainers.findBySubject", query = "SELECT t FROM Trainers t WHERE t.subject = :subject")})
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "Trainers.findAll", query = "SELECT t FROM Trainers t")
+//    , @NamedQuery(name = "Trainers.findById", query = "SELECT t FROM Trainers t WHERE t.id = :id")
+//    , @NamedQuery(name = "Trainers.findByFirstName", query = "SELECT t FROM Trainers t WHERE t.firstName = :firstName")
+//    , @NamedQuery(name = "Trainers.findByLastName", query = "SELECT t FROM Trainers t WHERE t.lastName = :lastName")
+//    , @NamedQuery(name = "Trainers.findBySubject", query = "SELECT t FROM Trainers t WHERE t.subject = :subject")})
 public class Trainer implements Serializable {
 
     private static final long serialVersionUID = 1L;

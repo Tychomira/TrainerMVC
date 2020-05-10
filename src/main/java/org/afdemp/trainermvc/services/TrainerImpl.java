@@ -18,20 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("trainerService")
 @Transactional
-public class TrainerImpl implements ITrainer{
+public class TrainerImpl implements ITrainer {
+
     @Autowired
     TrainerDaoImpl dao;
-    
-    
-    
-    
+
     public List<Trainer> findAllTrainers() {
-      List <Trainer> trainers=dao.findAllTrainers();
-      return trainers;
+        List<Trainer> trainers = dao.findAllTrainers();
+        return trainers;
     }
 
     public Trainer findById(int id) {
-       return dao.findById(id);
+        return dao.findById(id);
     }
 
     public boolean save(Trainer trainer) {
@@ -39,11 +37,12 @@ public class TrainerImpl implements ITrainer{
     }
 
     public boolean delete(int id) {
-      return dao.delete(id);
+        return dao.delete(id);
     }
 
     public boolean update(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.update(trainer);
+        return true;
     }
-    
+
 }
