@@ -32,18 +32,21 @@
                             <label class="col-sm-2 control-label">First Name</label>
                             <div class="col-sm-10">
                                 <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" />
+                                <form:errors path="firstName" cssStyle="color: #ff0000;"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Last Name</label>
                             <div class="col-sm-10">
                                 <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" />
+                                 <form:errors path="lastName" cssStyle="color: #ff0000;"/>
                             </div>
                         </div>      
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Subject</label>
                             <div class="col-sm-10">
                                 <form:input path="subject" type="text" class="form-control" id="subject" placeholder="Subject" />
+                                 <form:errors path="subject" cssStyle="color: #ff0000;"/>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-dark">Register</button>

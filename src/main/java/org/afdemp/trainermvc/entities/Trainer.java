@@ -16,8 +16,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
     import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -40,20 +42,27 @@ public class Trainer implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
+    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
+    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
-    @Size(max = 25)
+    
+    @Size(min =1, max = 25)
+    @NotNull
+    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "subject", length = 25)
     private String subject;
-
+ 
     public Trainer() {
     }
 

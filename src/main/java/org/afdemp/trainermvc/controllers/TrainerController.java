@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,12 +59,18 @@ public class TrainerController {
         view.addAttribute("trainer", trainer);
         view.addAttribute("listurl", listurl);
         return("newtrainer");
-    }
+    } 
+    
     
      // post form for new trainer
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String saveTrainer(ModelMap view, Trainer trainer) {
+    public String saveTrainer(@ModelAttribute("trainer") @Validated Trainer trainer, BindingResult bindingResult,ModelMap view) {
+        if (bindingResult.hasErrors()) {
+            return "newtrainer";
+        }
+        
         if(trainerService.save(trainer)) {
+                   
             view.addAttribute("message", new String("You have successfully registered a trainer"));
         }
         else {
@@ -70,7 +79,8 @@ public class TrainerController {
             view.addAttribute("listurl", listurl);
         return("newtrainer");
     }
-    
+
+
     
       // delete for an existing trainer
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
