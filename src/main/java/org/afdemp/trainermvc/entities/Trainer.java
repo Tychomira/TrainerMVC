@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-    import javax.validation.constraints.Size;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -41,36 +41,33 @@ public class Trainer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
-    private Integer id;
-    
+    private int id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
-    
-    @Size(min =1, max = 25)
+
+    @Size(min = 1, max = 25)
     @NotNull
-    @Pattern(regexp="^ [A-Za-z]")
     @Column(name = "subject", length = 25)
     private String subject;
- 
+
     public Trainer() {
     }
 
-    public Trainer(Integer id) {
+    public Trainer(int id) {
         this.id = id;
     }
 
-    public Trainer(Integer id, String firstName, String lastName) {
+    public Trainer(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -110,19 +107,33 @@ public class Trainer implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
+        hash = 79 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
+        hash = 79 * hash + (this.subject != null ? this.subject.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Trainer)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Trainer other = (Trainer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Trainer other = (Trainer) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if ((this.firstName == null) ? (other.firstName != null) : !this.firstName.equals(other.firstName)) {
+            return false;
+        }
+        if ((this.lastName == null) ? (other.lastName != null) : !this.lastName.equals(other.lastName)) {
             return false;
         }
         return true;
@@ -132,5 +143,5 @@ public class Trainer implements Serializable {
     public String toString() {
         return "org.afdemp.trainermvc.entities.Trainers[ id=" + id + " ]";
     }
-    
+
 }

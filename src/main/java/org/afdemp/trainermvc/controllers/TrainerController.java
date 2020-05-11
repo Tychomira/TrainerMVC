@@ -6,6 +6,7 @@
 package org.afdemp.trainermvc.controllers;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.afdemp.trainermvc.entities.Trainer;
 import org.afdemp.trainermvc.services.ITrainer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -71,9 +73,13 @@ public class TrainerController {
         
         if(trainerService.save(trainer)) {
                    
-            view.addAttribute("message", new String("You have successfully registered a trainer"));
+         
+
+		view.addAttribute("success", "Trainer " + trainer.getFirstName() + " "+ trainer.getLastName() + " registered successfully");
+                return ("registrationsuccess");
         }
         else {
+            
             view.addAttribute("message", new String("Something went wrong! Please try again! "));
         }
             view.addAttribute("listurl", listurl);
@@ -103,16 +109,25 @@ public class TrainerController {
     }
     
      // store edit / update for an existing trainer
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updateTrainer(ModelMap view, Trainer trainer) {
-       trainerService.update(trainer);
-        view.addAttribute("msg", new String(""));
-        return("redirect:/list");
+    @RequestMapping(value ="/edit/{id}" , method = RequestMethod.POST)
+    public String updateTrainer(@Valid Trainer trainer, BindingResult result, ModelMap view,  @PathVariable int id) {
+        
+       
+            if (result.hasErrors()) {
+                   trainer.setId(id);
+                   
+        return ("edittrainer");
+			
+            }
+               trainerService.update(trainer);
+       
+		view.addAttribute("success", "Trainer " + trainer.getFirstName() + " "+ trainer.getLastName() + " updated successfully");
+		return ("registrationsuccess");
+//        view.addAttribute("msg", new String(""));
+//        return("redirect:/list");
     }
     
     
-    
-    
-    }
+    }   
 
 
